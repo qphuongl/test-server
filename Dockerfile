@@ -9,12 +9,12 @@ RUN go mod download
 
 COPY ./ ./
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o phuongne .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o atest .
 
 FROM alpine:3.14
 EXPOSE 8080
-COPY --from=builder /app/phuongne .
+COPY --from=builder /app/atest .
 
-RUN chmod +x phuongne
+RUN chmod +x atest
 
-ENTRYPOINT [ "./phuongne" ]
+ENTRYPOINT [ "./atest" ]

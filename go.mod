@@ -1,4 +1,4 @@
-module github.com/func25/phuongne
+module atest
 
 go 1.18
 
