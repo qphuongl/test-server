@@ -32,7 +32,7 @@ ingress:
   annotations: 
     kubernetes.io/ingress.class: nginx
   hosts:
-    - host: atest.local
+    - host: atest.thetanarena.com
       paths:
         - path: /
           pathType: ImplementationSpecific
