@@ -19,7 +19,7 @@ autoscaling:
 
 serviceAccount:
   create: true # create?
-  name: defaultSA # annotation.name = "default"
+  name: defaultsa # annotation.name = "default"
   annotations: {}
 
 service:
