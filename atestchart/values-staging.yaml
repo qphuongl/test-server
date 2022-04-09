@@ -1,0 +1,6 @@
+resources:
+  requests:
+    cpu: 150m
+
+gke:
+  projectId: "thetan-staging"

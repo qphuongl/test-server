@@ -1,0 +1,8 @@
+gke:
+  projectId: "default-project-id"
+
+image:
+  name: "atest"
+
+serviceAccount:
+  name: "atest"

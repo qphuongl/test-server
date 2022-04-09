@@ -31,6 +31,7 @@ jobs:
       - name: Setup docker authentication
         run: gcloud --quiet auth configure-docker
 
+      # Get k8s credentials
       - name: Get GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
         with:
@@ -38,6 +39,7 @@ jobs:
           location: ${{env.GKE_ZONE}}
           credentials: ${{secrets.GKE_SA_KEY}}
 
+      # image
       - name: Build image
         run: docker build \
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
@@ -48,11 +50,12 @@ jobs:
       - name: Store image
         run: docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
-      - name: Install helm
-        uses: azure/setup-helm@v1
+      # helm cli
+      - name: Setup Kustomize
+        run: |-
+          
 
       - name: Deploy
         run: |-
-          helm upgrade $PROJECT_ID $PROJECT_ID-cluster/ \
-          --set randocats.image.tag=$GITHUB_SHA \
-          --wait
+          helm upgrade --install ${{ IMAGE }}-${{ PROJECT_ID }} ../deploy/helm/${{ IMAGE }} \
+    

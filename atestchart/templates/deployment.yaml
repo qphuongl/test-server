@@ -1,0 +1,23 @@
+# todo: define liveness, readiness probe tpl
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.image.name }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.depl.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ .Values.image.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.image.name }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+        - name: {{ .Values.image.name }}
+          image: {{ .Values.image.repository }}
+          resources:
+            {{- toYaml .Values.depl.resources | nindent 12 -}}
