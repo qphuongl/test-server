@@ -54,6 +54,9 @@ jobs:
       - name: Helm CLI
         uses: azure/setup-helm@v1
 
+      - name: test
+        run: helm ls --all-namespaces
+
       # Deploy
       - name: Deploy
         run: |-
