@@ -1,7 +1,7 @@
 image:
   # ingress name -> service name -> deployment name -> pod name, container name
   # SA name
-  name: defaultImg
+  name: defaultimg
   repo: gcr.io # must be replace by cmd
   tag: ""
 

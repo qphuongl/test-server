@@ -60,8 +60,9 @@ jobs:
         run: |-
           helm upgrade $PROJECT_ID ./atestchart \
           --install \
-          --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+          --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA \
+          --set image.name=$IMAGE \
           -f ./atestchart/values-base.yaml \
-          -f ./atestchart/values-staging.yaml \
+          -f ./atestchart/values-staging.yaml 
       # helm install -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA --dry-run --debug atestchartrl ./atestchart
     
