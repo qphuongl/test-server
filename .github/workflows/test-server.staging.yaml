@@ -57,8 +57,7 @@ jobs:
       # Deploy
       - name: Deploy
         run: |-
-          helm upgrade $IMAGE ./atestchart \
-          --install \
+          helm upgrade --install $IMAGE ./atestchart \
           --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA \
           --set image.name=$IMAGE \
           -f ./atestchart/values-base.yaml \
