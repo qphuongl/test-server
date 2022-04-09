@@ -58,6 +58,10 @@ jobs:
       # Deploy
       - name: Deploy
         run: |-
-          helm upgrade --install -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA atestchartrl ./atestchart
+          helm upgrade $PROJECT_ID ./atestchart \
+          --install \
+          --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+          -f ./atestchart/values-base.yaml \
+          -f ./atestchart/values-staging.yaml \
       # helm install -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA --dry-run --debug atestchartrl ./atestchart
     
