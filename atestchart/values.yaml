@@ -35,4 +35,4 @@ ingress:
     - host: atest.staging.thetanarena.com
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
