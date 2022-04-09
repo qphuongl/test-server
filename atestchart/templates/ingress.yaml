@@ -20,6 +20,7 @@ spec:
                 name: {{ $imageName }}
                 port:
                   name: http
+                  number: 80
           {{- end }}
     {{- end }}
 {{- end }}
