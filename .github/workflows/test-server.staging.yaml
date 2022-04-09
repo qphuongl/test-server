@@ -7,8 +7,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: thetan-test
   GKE_ZONE: asia-southeast1-a 
-  DEPLOYMENT_NAME: atest 
-  IMAGE: static-site 
+  IMAGE: atest
   
 jobs:
   deployment:
@@ -58,11 +57,10 @@ jobs:
       # Deploy
       - name: Deploy
         run: |-
-          helm upgrade $PROJECT_ID ./atestchart \
+          helm upgrade $IMAGE ./atestchart \
           --install \
           --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA \
           --set image.name=$IMAGE \
           -f ./atestchart/values-base.yaml \
           -f ./atestchart/values-staging.yaml 
-      # helm install -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA --dry-run --debug atestchartrl ./atestchart
     
