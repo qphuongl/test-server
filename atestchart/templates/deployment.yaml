@@ -18,6 +18,6 @@ spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
         - name: {{ .Values.image.name }}
-          image: {{ .Values.image.repository }}
+          image: {{ .Values.image.repo }}
           resources:
-            {{- toYaml .Values.depl.resources | nindent 12 -}}
+            {{- toYaml .Values.depl.resources | nindent 12 }}

@@ -51,11 +51,12 @@ jobs:
         run: docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
       # helm cli
-      - name: Setup Kustomize
-        run: |-
-          
+      - name: Helm CLI
+        uses: azure/setup-helm@v1
 
+      # Deploy
       - name: Deploy
         run: |-
-          helm upgrade --install ${{ IMAGE }}-${{ PROJECT_ID }} ../deploy/helm/${{ IMAGE }} \
+          helm upgrade --install -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA atestchartrl ./atestchart
+      # helm install -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA --dry-run --debug atestchartrl ./atestchart
     
