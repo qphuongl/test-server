@@ -54,6 +54,10 @@ jobs:
       - name: Helm CLI
         uses: azure/setup-helm@v1
 
+      - name: GCP Env
+        run: |-
+          gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+
       - name: test
         run: helm ls --all-namespaces
 
