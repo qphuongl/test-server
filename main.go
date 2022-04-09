@@ -26,7 +26,8 @@ func main() {
 		c.JSON(http.StatusNotFound, gin.H{"message": "404 not found"})
 	})
 
-	if err := r.Run("0.0.0.0:80"); err != nil {
+	// if err := r.Run("0.0.0.0:80"); err != nil {
+	if err := r.Run(":80"); err != nil {
 		log.Fatal("cannot run server", err)
 	}
 }
