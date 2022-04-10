@@ -21,9 +21,9 @@ spec:
           image: {{ .Values.image.repo }}
           resources:
             {{- toYaml .Values.depl.resources | nindent 12 }}
-      env:
-        - name: MESSAGE
-          valueFrom:
-          configMapKeyRef:
-            name: atest-config
-            key: MESSAGE
+          env:
+            - name: MESSAGE
+              valueFrom:
+              configMapKeyRef:
+                name: atest-config
+                key: MESSAGE
