@@ -43,6 +43,10 @@ func main() {
 	})
 
 	// if err := r.Run("0.0.0.0:80"); err != nil {
+	if config.EnvConfig.Port == 0 {
+		config.EnvConfig.Port = 80
+	}
+	fmt.Println(config.EnvConfig)
 	if err := r.Run(fmt.Sprintf(":%d", config.EnvConfig.Port)); err != nil {
 		log.Fatal("cannot run server", err)
 	}
