@@ -1,6 +1,8 @@
 package main
 
 import (
+	"atest/config"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -8,9 +10,13 @@ import (
 )
 
 func main() {
+	if err := config.Init(); err != nil {
+		log.Fatal("cannot init config ", err)
+	}
+
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "i'm alive"})
+		c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf(`i'm alive and my message is "%s"`, config.EnvConfig.Message)})
 	})
 
 	r.NoRoute(func(c *gin.Context) {
@@ -27,7 +33,7 @@ func main() {
 	})
 
 	// if err := r.Run("0.0.0.0:80"); err != nil {
-	if err := r.Run(":80"); err != nil {
+	if err := r.Run(fmt.Sprintf(":%d", config.EnvConfig.Port)); err != nil {
 		log.Fatal("cannot run server", err)
 	}
 }
