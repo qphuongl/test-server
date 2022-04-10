@@ -18,6 +18,15 @@ func main() {
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf(`i'm alive and my message is "%s"`, config.EnvConfig.Message)})
 	})
+	r.GET("/ping2", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": `ver 1`})
+	})
+	// env:
+	// - name: MESSAGE
+	//   valueFrom:
+	// 	configMapKeyRef:
+	// 	  name: atest-config
+	// 	  key: MESSAGE
 
 	r.NoRoute(func(c *gin.Context) {
 		if c.Request.Method == http.MethodOptions {
