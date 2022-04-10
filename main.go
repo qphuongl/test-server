@@ -11,7 +11,8 @@ import (
 
 func main() {
 	if err := config.Init(); err != nil {
-		log.Fatal("cannot init config ", err)
+		// log.Fatal("cannot init config ", err)
+		log.Println(err)
 	}
 
 	r := gin.Default()

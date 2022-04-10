@@ -13,7 +13,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o atest .
 
 FROM alpine:3.14
 COPY --from=builder /app/atest .
-COPY config/app.env /app/app.env
+COPY /config/app.env /config/app.env
 
 RUN chmod +x atest
 
