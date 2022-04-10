@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 	"runtime"
 
 	"github.com/spf13/viper"
@@ -16,6 +17,8 @@ var EnvConfig ENVConfig
 
 func Init() error {
 	_, path, _, _ := runtime.Caller(0)
+	fmt.Println(path)
+	fmt.Println(os.Getwd())
 	viper.AddConfigPath(fmt.Sprintf("%s/..", path))
 	viper.SetConfigName("app")
 	viper.SetConfigType("env")
