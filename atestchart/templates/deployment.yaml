@@ -24,6 +24,6 @@ spec:
           env:
             - name: MESSAGE
               valueFrom:
-              configMapKeyRef:
-                name: atest-config
-                key: MESSAGE
+                configMapKeyRef:
+                  name: atest-config
+                  key: MESSAGE
