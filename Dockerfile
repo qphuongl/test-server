@@ -17,4 +17,4 @@ COPY /config/app.env /app/config/app.env
 
 RUN chmod +x /app/atest
 
-ENTRYPOINT [ "./atest" ]
+ENTRYPOINT [ "/app/atest" ]
