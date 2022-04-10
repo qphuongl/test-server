@@ -15,6 +15,6 @@ FROM alpine:3.14
 COPY --from=builder /app/atest .
 COPY /config/app.env /app/config/app.env
 
-RUN chmod +x /app/atest
+RUN chmod +x atest
 
-ENTRYPOINT [ "/app/atest" ]
+ENTRYPOINT [ "./atest" ]
