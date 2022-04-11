@@ -17,15 +17,13 @@ type ENVConfig struct {
 var EnvConfig ENVConfig
 
 func Init() error {
-	viper.AutomaticEnv()
-	fmt.Println(os.Environ())
 	_, path, _, _ := runtime.Caller(0)
 	fmt.Println(path)
 	fmt.Println(os.Getwd())
 	viper.AddConfigPath(fmt.Sprintf("%s/..", path))
 	viper.SetConfigName("app")
 	viper.SetConfigType("env")
-	// viper.AutomaticEnv()
+	viper.AutomaticEnv()
 	err := viper.ReadInConfig()
 	if err != nil {
 		return err
