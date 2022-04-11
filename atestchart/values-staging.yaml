@@ -1,6 +1,16 @@
-resources:
-  requests:
-    cpu: 150m
-
 gke:
   projectId: "thetan-staging"
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 30
+  cpuPercent: 80
+  memPercent: 80
+
+# pod
+pod:
+  resources:
+    requests:
+      cpu: 64m
+      memory: 256Mi

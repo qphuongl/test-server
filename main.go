@@ -9,6 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//helm install --dry-run --debug atest ./atestchart --set image.repo=gcr.io --set image.name=atest -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml
+
 func main() {
 	if err := config.Init(); err != nil {
 		// log.Fatal("cannot init config ", err)
