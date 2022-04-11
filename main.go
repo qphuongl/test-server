@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,6 +21,13 @@ func main() {
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf(`i'm alive and my message is "%s"`, config.EnvConfig.Message)})
+	})
+	r.GET("/stress", func(c *gin.Context) {
+		j := 0
+		for i := 0; i < 100000; i++ {
+			j += i
+		}
+		c.JSON(http.StatusOK, gin.H{"message": strconv.Itoa(j)})
 	})
 	r.GET("/ping2", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": `ver 1`})

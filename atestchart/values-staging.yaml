@@ -3,7 +3,7 @@ gke:
 
 autoscaling:
   enabled: true
-  minReplicas: 3
+  minReplicas: 1
   maxReplicas: 30
   cpuPercent: 80
   memPercent: 80
