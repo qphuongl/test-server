@@ -27,3 +27,8 @@ spec:
                 configMapKeyRef:
                   name: atest-config
                   key: MESSAGE
+            - name: SECRET_MESSAGE
+              valueFrom:
+                secretMapKeyRef:
+                  name: atest-secret
+                  key: PRIVATE_MESSAGE
