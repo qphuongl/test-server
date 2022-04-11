@@ -12,5 +12,5 @@ autoscaling:
 pod:
   resources:
     requests:
-      cpu: 64m
+      cpu: 32m
       memory: 256Mi
