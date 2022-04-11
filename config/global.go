@@ -18,6 +18,7 @@ type ENVConfig struct {
 var EnvConfig ENVConfig
 
 func Init() error {
+	fmt.Println(os.Environ())
 	_, path, _, _ := runtime.Caller(0)
 	fmt.Println(path)
 	fmt.Println(os.Getwd())
