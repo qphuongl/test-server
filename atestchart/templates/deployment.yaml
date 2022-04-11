@@ -33,3 +33,9 @@ spec:
                   name: atest-secret
                   key: PRIVATE_MESSAGE
                   optional: false
+            - name: PRIVATE_MESSAGE
+              valueFrom:
+                secretKeyRef:
+                  name: atest-secret
+                  key: PRIVATE_MESSAGE
+                  optional: false
