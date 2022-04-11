@@ -3,6 +3,7 @@ module atest
 go 1.18
 
 require (
+	github.com/func25/mathfunc v1.0.2
 	github.com/gin-gonic/gin v1.7.7
 	github.com/spf13/viper v1.10.1
 )

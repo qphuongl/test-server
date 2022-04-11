@@ -19,13 +19,13 @@ func main() {
 		log.Println(err)
 	}
 
-	r := gin.Default()
+	r := gin.New()
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf(`i'm alive and my message is "%s"`, config.EnvConfig.Message)})
 	})
 	r.GET("/stress", func(c *gin.Context) {
 		max := 1000000
-		mathfunc.Random0ToInt(max, max*1000)
+		mathfunc.RandInt(max, max*1000)
 		j := 0
 		for i := 0; i < max; i++ {
 			j += i
