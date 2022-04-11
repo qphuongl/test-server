@@ -23,7 +23,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": `ver 1`})
 	})
 	r.GET("/private", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"private message": `ver 1`})
+		c.JSON(http.StatusOK, gin.H{"private message": config.EnvConfig.PrivateMessage})
 	})
 
 	r.NoRoute(func(c *gin.Context) {

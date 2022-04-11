@@ -29,6 +29,6 @@ spec:
                   key: MESSAGE
             - name: SECRET_MESSAGE
               valueFrom:
-                secretMapKeyRef:
+                secretKeyRef:
                   name: atest-secret
                   key: PRIVATE_MESSAGE
