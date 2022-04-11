@@ -25,7 +25,7 @@ func main() {
 	})
 	r.GET("/stress", func(c *gin.Context) {
 		max := 1000000
-		mathfunc.RandInt(max, max*1000)
+		max, _ = mathfunc.RandInt(max, max*1000)
 		j := 0
 		for i := 0; i < max; i++ {
 			j += i
