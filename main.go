@@ -24,7 +24,7 @@ func main() {
 	})
 	r.GET("/stress", func(c *gin.Context) {
 		j := 0
-		for i := 0; i < 100000; i++ {
+		for i := 0; i < 10000000; i++ {
 			j += i
 		}
 		c.JSON(http.StatusOK, gin.H{"message": strconv.Itoa(j)})
