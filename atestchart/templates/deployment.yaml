@@ -21,17 +21,15 @@ spec:
           image: {{ .Values.image.repo }}
           resources:
             {{- toYaml .Values.depl.resources | nindent 12 }}
-          volumeMounts:
-            - name: vl-atest-config
-              mountPath: /app/vl/atest-config
           env:
-            - name: SECRET_MESSAGE
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: atest-config
+                  key: MESSAGE
+            - name: PRIVATE_MESSAGE
               valueFrom:
                 secretKeyRef:
                   name: atest-secret
                   key: PRIVATE_MESSAGE
                   optional: false
-      volumes:
-        - name: vl-atest-config
-          configMap:
-            name: atest-config
