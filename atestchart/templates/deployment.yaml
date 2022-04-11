@@ -25,11 +25,6 @@ spec:
             - name: vl-atest-config
               mountPath: /app/vl/atest-config
           env:
-            # - name: MESSAGE
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       name: atest-config
-            #       key: MESSAGE
             - name: SECRET_MESSAGE
               valueFrom:
                 secretKeyRef:
