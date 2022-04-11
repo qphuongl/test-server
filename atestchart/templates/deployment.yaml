@@ -32,3 +32,4 @@ spec:
                 secretKeyRef:
                   name: atest-secret
                   key: PRIVATE_MESSAGE
+                  optional: false
