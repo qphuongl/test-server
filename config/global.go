@@ -11,7 +11,7 @@ import (
 type ENVConfig struct {
 	Port           int    `mapstructure:"PORT"`
 	Message        string `mapstructure:"MESSAGE"`
-	PrivateMessage string `mapstructure:"PRIVATE_MESSAGE"`
+	PrivateMessage string `mapstructure:"SECRET_MESSAGE"`
 }
 
 var EnvConfig ENVConfig
