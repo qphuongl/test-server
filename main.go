@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/func25/mathfunc/mathfunc"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,12 +23,13 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf(`i'm alive and my message is "%s"`, config.EnvConfig.Message)})
 	})
 	r.GET("/stress", func(c *gin.Context) {
-		max := 1000000
-		max, _ = mathfunc.RandInt(max, max*1000)
 		j := 0
-		for i := 0; i < max; i++ {
-			j += i
-		}
+
+		// max := 1000000
+		// max, _ = mathfunc.RandInt(max, max*1000)
+		// for i := 0; i < max; i++ {
+		// 	j += i
+		// }
 		c.JSON(http.StatusOK, gin.H{"message": strconv.Itoa(j)})
 	})
 	r.GET("/ping2", func(c *gin.Context) {
