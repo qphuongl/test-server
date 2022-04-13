@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v7"
 )
 
 //helm install --dry-run --debug atest ./atestchart --set image.repo=gcr.io --set image.name=atest -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml
@@ -18,6 +19,21 @@ func main() {
 		log.Println(err)
 	}
 
+	c := connectRedis()
+	defer c.Close()
+
+	startServer()
+}
+
+func connectRedis() *redis.Client {
+	c := redis.NewClient(&redis.Options{
+		Addr: "redis.default.svc.cluster.local:6379",
+	})
+
+	return c
+}
+
+func startServer() {
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf(`i'm alive and my message is "%s"`, config.EnvConfig.Message)})
