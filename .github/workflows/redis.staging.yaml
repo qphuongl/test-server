@@ -1,10 +1,9 @@
 name: redis staging
 
 on: 
-  # workflow_dispatch
-  - push:
-      branches: [redis]
-  - workflow_dispatch
+  push:
+    branches: [redis]
+  workflow_dispatch:
 
 
 env:
