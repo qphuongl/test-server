@@ -34,7 +34,10 @@ func connectRedis() *redis.Client {
 	go func() {
 		i := 0
 		for {
-			c.Set("keyne", i, 0)
+			s := c.Set("keyne", i, 0)
+			if s.Err() != nil {
+				fmt.Println("something wrong with redis", s.Err())
+			}
 			time.Sleep(1 * time.Second)
 		}
 	}()
