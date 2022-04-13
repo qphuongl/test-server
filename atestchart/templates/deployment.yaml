@@ -37,14 +37,14 @@ spec:
             httpGet:
               path: /api/healthy
               port: 80 # thay port bằng value
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
             periodSeconds: 5
             failureThreshold: 8
           readinessProbe:
             httpGet:
               path: /api/ready
               port: 80 # thay port bằng value
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
             periodSeconds: 5
             failureThreshold: 8
 
