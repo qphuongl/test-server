@@ -2,14 +2,16 @@ name: redis staging
 
 on: 
   # workflow_dispatch
-  push:
-    branches: [redis]
+  - push:
+      branches: [redis]
+  - workflow_dispatch
+
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: thetan-test
   GKE_ZONE: asia-southeast1-a 
-  IMAGE: atest
+  IMAGE: redis
   
 jobs:
   deployment:
