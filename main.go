@@ -39,7 +39,7 @@ func connectRedis() *redis.Client {
 				fmt.Println("something wrong with redis", s.Err())
 			}
 			time.Sleep(1 * time.Second)
-		}
+		} //
 	}()
 
 	return c
