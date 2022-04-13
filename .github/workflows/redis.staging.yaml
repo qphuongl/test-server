@@ -52,6 +52,5 @@ jobs:
       - name: Deploy
         run: |-
           helm upgrade --install $IMAGE ./redischart \
-          -f ./redischart/values-base.yaml \
-          -f ./redischart/values-staging.yaml 
+          -f ./redischart/values-base.yaml 
     
