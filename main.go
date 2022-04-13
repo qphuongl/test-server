@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -38,9 +39,20 @@ func main() {
 	r.GET("/private", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"private message": config.EnvConfig.PrivateMessage})
 	})
+
+	healthy := true
+	go func() {
+		time.Sleep(25 * time.Second)
+		healthy = false
+	}()
+
 	r.GET("/api/healthy", func(c *gin.Context) {
-		fmt.Println("healthy")
-		c.JSON(http.StatusOK, gin.H{"private message": config.EnvConfig.PrivateMessage})
+		if healthy {
+			c.Status(http.StatusOK)
+		} else {
+			fmt.Println("--------- UNHEALTHY")
+			c.Status(http.StatusBadGateway)
+		}
 	})
 
 	r.GET("/api/ready", func(c *gin.Context) {
