@@ -41,9 +41,14 @@ func main() {
 	})
 
 	healthy := true
+	// go func() {
+	// 	time.Sleep(25 * time.Second)
+	// 	healthy = false
+	// }()
+	ready := true
 	go func() {
 		time.Sleep(25 * time.Second)
-		healthy = false
+		ready = false
 	}()
 
 	r.GET("/api/healthy", func(c *gin.Context) {
@@ -56,8 +61,12 @@ func main() {
 	})
 
 	r.GET("/api/ready", func(c *gin.Context) {
-		fmt.Println("ready")
-		c.JSON(http.StatusOK, gin.H{"private message": config.EnvConfig.PrivateMessage})
+		if ready {
+			c.Status(http.StatusOK)
+		} else {
+			fmt.Println("--------- UNREADY")
+			c.Status(http.StatusBadGateway)
+		}
 	})
 
 	r.NoRoute(func(c *gin.Context) {
