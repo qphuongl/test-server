@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,7 +18,7 @@ func main() {
 		log.Println(err)
 	}
 
-	r := gin.New()
+	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf(`i'm alive and my message is "%s"`, config.EnvConfig.Message)})
 	})
@@ -46,10 +45,10 @@ func main() {
 	// 	healthy = false
 	// }()
 	ready := true
-	go func() {
-		time.Sleep(25 * time.Second)
-		ready = false
-	}()
+	// go func() {
+	// 	time.Sleep(25 * time.Second)
+	// 	ready = false
+	// }()
 
 	r.GET("/api/healthy", func(c *gin.Context) {
 		if healthy {
