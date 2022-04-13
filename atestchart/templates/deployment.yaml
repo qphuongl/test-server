@@ -33,3 +33,19 @@ spec:
                   name: atest-secret
                   key: PRIVATE_MESSAGE
                   optional: false
+          livenessProbe:
+            httpGet:
+              path: /api/healthy
+              port: 3000 # thay port bằng value
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            failureThreshold: 8
+          readinessProbe:
+            httpGet:
+              path: /api/ready
+              port: 3000 # thay port bằng value
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            failureThreshold: 8
+
+          
