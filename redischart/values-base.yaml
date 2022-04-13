@@ -1,6 +1,9 @@
 serviceAccount:
   name: "redissa"
 
+gke:
+  projectId: "thetan-staging"
+
 # pod
 pod:
   resources:
