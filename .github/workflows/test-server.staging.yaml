@@ -1,9 +1,9 @@
 name: test-server staging
 
 on: 
-  # workflow_dispatch
   push:
     branches: [main]
+  workflow_dispatch:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
