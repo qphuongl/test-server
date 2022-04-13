@@ -38,12 +38,12 @@ func main() {
 	r.GET("/private", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"private message": config.EnvConfig.PrivateMessage})
 	})
-	r.GET("/healthy", func(c *gin.Context) {
+	r.GET("/api/healthy", func(c *gin.Context) {
 		fmt.Println("healthy")
 		c.JSON(http.StatusOK, gin.H{"private message": config.EnvConfig.PrivateMessage})
 	})
 
-	r.GET("/ready", func(c *gin.Context) {
+	r.GET("/api/ready", func(c *gin.Context) {
 		fmt.Println("ready")
 		c.JSON(http.StatusOK, gin.H{"private message": config.EnvConfig.PrivateMessage})
 	})
