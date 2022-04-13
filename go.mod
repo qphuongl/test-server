@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.7.7
-	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/spf13/viper v1.10.1
 )
