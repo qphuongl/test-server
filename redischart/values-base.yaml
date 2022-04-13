@@ -16,3 +16,9 @@ pod:
 image:
   name: redis
   repo: redis
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 6379
+  podPort: 6379
