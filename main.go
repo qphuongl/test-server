@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v7"
@@ -30,11 +31,19 @@ func connectRedis() *redis.Client {
 		Addr: "redis.default.svc.cluster.local:6379",
 	})
 
+	go func() {
+		i := 0
+		for {
+			c.Set("keyne", i, 0)
+			time.Sleep(1 * time.Second)
+		}
+	}()
+
 	return c
 }
 
 func startServer() {
-	r := gin.Default()
+	r := gin.New()
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf(`i'm alive and my message is "%s"`, config.EnvConfig.Message)})
 	})
