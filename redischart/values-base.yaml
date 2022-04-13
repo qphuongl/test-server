@@ -1,0 +1,15 @@
+serviceAccount:
+  name: "redissa"
+
+# pod
+pod:
+  resources:
+    requests:
+      cpu: 32m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+
+image:
+  name: redis
+  repo: redis

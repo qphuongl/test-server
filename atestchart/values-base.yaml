@@ -1,5 +1,5 @@
-gke:
-  projectId: "default-project-id"
-
 serviceAccount:
   name: "atest"
+
+ingress:
+  enabled: true
