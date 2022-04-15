@@ -10,7 +10,6 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: thetan-test
   GKE_ZONE: asia-southeast1-a 
-  IMAGE: redis
   
 jobs:
   deployment:
@@ -52,6 +51,6 @@ jobs:
       # Deploy
       - name: Deploy
         run: |-
-          helm upgrade --install $IMAGE ./redischart \
-          -f ./redischart/values-base.yaml 
+          helm upgrade --install redis-server bitnami/redis \
+          -f ./redisautochart/values.yaml 
     
