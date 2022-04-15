@@ -34,7 +34,7 @@ jobs:
 
       # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
       - name: Setup docker authentication
-        run: gcloud --quiet auth configure-docker 
+        run: gcloud --quiet auth configure-docker $AR_URL
 
       # Get k8s credentials
       - name: Get GKE credentials
