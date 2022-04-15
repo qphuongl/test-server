@@ -12,6 +12,8 @@ env:
   IMAGE: atest
   WORKLOAD_IDENTITY_PROVIDER: projects/911077854090/locations/global/workloadIdentityPools/github-actions/providers/github-oidc
   SERVICE_ACCOUNT: github@thetan-staging.iam.gserviceaccount.com
+  AR_REPOSITORY_NAME: thetan-arena
+  AR_URL: asia-southeast1-docker.pkg.dev
   
 jobs:
   deployment:
@@ -32,7 +34,7 @@ jobs:
 
       # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
       - name: Setup docker authentication
-        run: gcloud --quiet auth configure-docker 
+        run: gcloud --quiet auth configure-docker $AR_URL
 
       # Get k8s credentials
       - name: Get GKE credentials
@@ -40,13 +42,13 @@ jobs:
         with:
           cluster_name: ${{env.GKE_CLUSTER}}
           location: ${{env.GKE_ZONE}}
-          credentials: ${{secrets.GKE_SA_KEY_2}}
+          credentials: ${{secrets.GKE_SA_KEY}}
       
-      - name: Get GKE credentials
-        uses: 'google-github-actions/auth@v0'
-        with:
-          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ env.SERVICE_ACCOUNT }}
+      # - name: Get GKE credentials
+      #   uses: 'google-github-actions/auth@v0'
+      #   with:
+      #     workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+      #     service_account: ${{ env.SERVICE_ACCOUNT }}
 
       # image
       - name: Build image
@@ -58,7 +60,7 @@ jobs:
           .
       
       - name: Store image
-        run: docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+        run: docker push "$AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE/$IMAGE:$GITHUB_SHA"
 
       # helm cli
       - name: Helm CLI
