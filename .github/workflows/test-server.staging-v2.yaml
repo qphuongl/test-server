@@ -30,11 +30,11 @@ jobs:
 
       # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
       - name: Setup docker authentication
-        run: gcloud --quiet auth configure-docker
+        run: gcloud --quiet auth configure-docker asia-southeast1-docker.pkg.dev
 
       # Get k8s credentials
       - name: Get GKE credentials
-        uses: google-github-actions/get-gke-credentials@v0
+        uses: google-github-actions/auth@v0
         with:
           cluster_name: ${{env.GKE_CLUSTER}}
           location: ${{env.GKE_ZONE}}
