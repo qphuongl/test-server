@@ -1,0 +1,24 @@
+serviceAccount:
+  name: "redissa"
+
+gke:
+  projectId: "thetan-staging"
+
+# pod
+pod:
+  resources:
+    requests:
+      cpu: 32m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+
+image:
+  name: redis
+  repo: redis
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 6379
+  podPort: 6379

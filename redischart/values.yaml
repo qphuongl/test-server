@@ -18,7 +18,7 @@ autoscaling:
   memPercent: 80
 
 serviceAccount:
-  enabled: true # create?
+  enabled: true # create? 
   name: defaultsa # annotation.name = "default"
   annotations: {}
 
@@ -33,7 +33,7 @@ ingress:
   annotations: 
     kubernetes.io/ingress.class: "nginx"
   hosts:
-    - host: default.staging.thetanarena.com
+    - host: atest.staging.thetanarena.com
       paths:
         - path: /
           pathType: Prefix
