@@ -18,7 +18,7 @@ autoscaling:
   memPercent: 80
 
 serviceAccount:
-  enabled: true # create?
+  enabled: true # create? 
   name: defaultsa # annotation.name = "default"
   annotations: {}
 
