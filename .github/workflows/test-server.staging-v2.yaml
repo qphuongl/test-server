@@ -74,7 +74,7 @@ jobs:
       - name: Deploy
         run: |-
           helm upgrade --install --debug $IMAGE $CHART \
-          --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA \
+          --set image.repo=$AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE/$IMAGE:$GITHUB_SHA \
           --set image.name=$IMAGE \
           -f ./atestchart/values-base.yaml \
           -f ./atestchart/values-staging.yaml 
