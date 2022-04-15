@@ -51,6 +51,9 @@ jobs:
       #     service_account: ${{ env.SERVICE_ACCOUNT }}
 
       # image
+      - name: Test Buildkit
+        run: EXPORT DOCKER_BUILDKIT=1
+        
       - name: Build image
         run: |-
           docker build \
