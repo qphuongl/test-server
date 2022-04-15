@@ -54,13 +54,13 @@ jobs:
       - name: Build image
         run: |-
           docker build \
-          --tag "$AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE/$IMAGE:$GITHUB_SHA" \
+          --tag "$AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
       
       - name: Store image
-        run: docker push "$AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE/$IMAGE:$GITHUB_SHA"
+        run: docker push "$AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE:$GITHUB_SHA"
 
       # helm cli
       - name: Helm CLI
