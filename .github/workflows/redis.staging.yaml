@@ -48,10 +48,6 @@ jobs:
         run: |-
           gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
-      - name: Check Helm
-        run: |-
-          helm repo list 
-
       - name: Add binami repo
         run: helm repo add bitnami https://charts.bitnami.com/bitnami
 
