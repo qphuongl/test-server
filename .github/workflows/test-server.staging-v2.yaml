@@ -34,7 +34,7 @@ jobs:
 
       # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
       - name: Setup docker authentication
-        run: gcloud --quiet auth configure-docker $AR_URL
+        run: gcloud --quiet auth configure-docker 
 
       # Get k8s credentials
       - name: Get GKE credentials
@@ -80,4 +80,3 @@ jobs:
           -f ./atestchart/values-staging.yaml 
         env:
           CHART: oci://asia-southeast1-docker.pkg.dev/thetan-staging/test-charts/atestchart
-    
