@@ -10,6 +10,8 @@ env:
   GKE_CLUSTER: thetan-test
   GKE_ZONE: asia-southeast1-a 
   IMAGE: atest
+  WORKLOAD_IDENTITY_PROVIDER: projects/911077854090/locations/global/workloadIdentityPools/github-actions/providers/github-oidc
+  SERVICE_ACCOUNT: github@thetan-staging.iam.gserviceaccount.com
   
 jobs:
   deployment:
@@ -33,12 +35,18 @@ jobs:
         run: gcloud --quiet auth configure-docker 
 
       # Get k8s credentials
+      # - name: Get GKE credentials
+      #   uses: google-github-actions/get-gke-credentials@v0
+      #   with:
+      #     cluster_name: ${{env.GKE_CLUSTER}}
+      #     location: ${{env.GKE_ZONE}}
+      #     credentials: ${{secrets.GKE_SA_KEY}}
+      
       - name: Get GKE credentials
-        uses: google-github-actions/get-gke-credentials@v0
+        uses: 'google-github-actions/auth@v0'
         with:
-          cluster_name: ${{env.GKE_CLUSTER}}
-          location: ${{env.GKE_ZONE}}
-          credentials: ${{secrets.GKE_SA_KEY}}
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
 
       # image
       - name: Build image
