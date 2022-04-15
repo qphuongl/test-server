@@ -1,16 +1,14 @@
-name: test-server staging
+name: redis staging
 
 on: 
-  # workflow_dispatch
   push:
-    branches: [main]
+    branches: [redis]
   workflow_dispatch:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: thetan-test
   GKE_ZONE: asia-southeast1-a 
-  IMAGE: atest
   
 jobs:
   deployment:
@@ -41,18 +39,6 @@ jobs:
           location: ${{env.GKE_ZONE}}
           credentials: ${{secrets.GKE_SA_KEY}}
 
-      # image
-      - name: Build image
-        run: |-
-          docker build \
-          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" \
-          .
-      
-      - name: Store image
-        run: docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
-
       # helm cli
       - name: Helm CLI
         uses: azure/setup-helm@v1
@@ -61,15 +47,12 @@ jobs:
         run: |-
           gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
-      - name: test
-        run: helm ls --all-namespaces
+      - name: Add binami repo
+        run: helm repo add bitnami https://charts.bitnami.com/bitnami
 
       # Deploy
       - name: Deploy
         run: |-
-          helm upgrade --install $IMAGE ./atestchart \
-          --set image.repo=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA \
-          --set image.name=$IMAGE \
-          -f ./atestchart/values-base.yaml \
-          -f ./atestchart/values-staging.yaml 
+          helm upgrade --install redis-server bitnami/redis \
+          -f ./redisautochart/values.yaml 
     
