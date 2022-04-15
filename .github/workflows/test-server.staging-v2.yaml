@@ -14,6 +14,7 @@ env:
   SERVICE_ACCOUNT: github@thetan-staging.iam.gserviceaccount.com
   AR_REPOSITORY_NAME: thetan-arena
   AR_URL: asia-southeast1-docker.pkg.dev
+  DOCKER_BUILDKIT: 1
   
 jobs:
   deployment:
@@ -50,10 +51,6 @@ jobs:
       #     workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
       #     service_account: ${{ env.SERVICE_ACCOUNT }}
 
-      # image
-      - name: Test Buildkit
-        run: EXPORT DOCKER_BUILDKIT=1
-        
       - name: Build image
         run: |-
           docker build \
