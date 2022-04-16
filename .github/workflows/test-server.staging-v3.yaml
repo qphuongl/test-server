@@ -52,7 +52,7 @@ jobs:
       #     service_account: ${{ env.SERVICE_ACCOUNT }}
 
       - name: Test
-        run: ECHO $IMAGE_FULL_NAME
+        run: echo $IMAGE_FULL_NAME
         env:
           IMAGE_FULL_NAME: $AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE
 
