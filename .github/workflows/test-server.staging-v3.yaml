@@ -58,8 +58,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $IMAGE_FULL_NAME:$GITHUB_SHA
-          cache-from: type=registry,ref=$IMAGE_FULL_NAME:buildcache
+          tags: ${{ IMAGE_FULL_NAME }}:${{ GITHUB_SHA }}
+          cache-from: type=registry,ref=${{ IMAGE_FULL_NAME }}:buildcache
           cache-to: type=registry,ref=$IMAGE_FULL_NAME:buildcache,mode=max
         env: 
           IMAGE_FULL_NAME: $AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE
