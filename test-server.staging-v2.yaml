@@ -58,6 +58,14 @@ jobs:
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
+
+      - name: Buildx image
+        uses: docker/build-push-action@v2
+        with:
+          cache-from: type=registry,ref=$IMAGE_FULL_NAME:buildcache
+          cache-to: type=registry,ref=$IMAGE_FULL_NAME:buildcache,mode=max
+        env:
+          IMAGE_FULL_NAME: $AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE
       
       - name: Store image
         run: docker push "$AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE:$GITHUB_SHA"
