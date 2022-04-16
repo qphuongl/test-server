@@ -59,7 +59,7 @@ jobs:
         with:
           push: true
           tags: ${{ env.IMAGE_FULL_NAME }}:${{ github.sha }}
-          cache-from: type=registry,ref=${{ IMAGE_FULL_NAME }}:buildcache
+          cache-from: type=registry,ref=$IMAGE_FULL_NAME:buildcache
           cache-to: type=registry,ref=$IMAGE_FULL_NAME:buildcache,mode=max
         env: 
           IMAGE_FULL_NAME: $AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE
