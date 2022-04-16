@@ -58,7 +58,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ env.IMAGE_FULL_NAME }}:${{ github.sha }}
+          tags: asia-southeast1-docker.pkg.dev/thetan-staging/thetan-arena/atest:${{ github.sha }}
           cache-from: type=registry,ref=$IMAGE_FULL_NAME:buildcache
           cache-to: type=registry,ref=$IMAGE_FULL_NAME:buildcache,mode=max
         env: 
