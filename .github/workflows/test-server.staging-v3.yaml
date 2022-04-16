@@ -59,8 +59,8 @@ jobs:
         with:
           push: true
           tags: asia-southeast1-docker.pkg.dev/thetan-staging/thetan-arena/atest:${{ github.sha }}
-          cache-from: type=registry,ref=$IMAGE_FULL_NAME:buildcache
-          cache-to: type=registry,ref=$IMAGE_FULL_NAME:buildcache,mode=max
+          cache-from: type=registry,ref=asia-southeast1-docker.pkg.dev/thetan-staging/thetan-arena/atest:buildcache
+          cache-to: type=registry,ref=asia-southeast1-docker.pkg.dev/thetan-staging/thetan-arena/atest:buildcache,mode=max
         env: 
           IMAGE_FULL_NAME: $AR_URL/$PROJECT_ID/$AR_REPOSITORY_NAME/$IMAGE
 
