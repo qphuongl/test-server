@@ -12,6 +12,7 @@ type ENVConfig struct {
 	Port           int    `mapstructure:"PORT"`
 	Message        string `mapstructure:"MESSAGE"`
 	PrivateMessage string `mapstructure:"PRIVATE_MESSAGE"`
+	RedisPass      string `mapstructure:"REDIS_PASS"`
 }
 
 var EnvConfig ENVConfig

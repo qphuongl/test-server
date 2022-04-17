@@ -27,8 +27,10 @@ func main() {
 }
 
 func connectRedis() *redis.Client {
+	fmt.Println(config.EnvConfig)
 	c := redis.NewClient(&redis.Options{
-		Addr: "redis-server.default.svc.cluster.local:6379",
+		Addr:     "redis-server.default.svc.cluster.local:6379",
+		Password: config.EnvConfig.RedisPass,
 	})
 
 	go func() {

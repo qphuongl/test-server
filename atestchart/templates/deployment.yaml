@@ -33,6 +33,12 @@ spec:
                   name: atest-secret
                   key: PRIVATE_MESSAGE
                   optional: false
+            - name: REDIS_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secrets
+                  key: REDIS_PASS
+                  optional: false
           livenessProbe:
             httpGet:
               path: /api/healthy
