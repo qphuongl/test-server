@@ -53,6 +53,5 @@ jobs:
       # Deploy
       - name: Deploy
         run: |-
-          helm upgrade --install mongodb-server bitnami/mongodb \
-          -f ./mongochart/values-staging.yaml 
+          helm upgrade --install mongodb-server bitnami/mongodb
     
