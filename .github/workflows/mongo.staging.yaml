@@ -53,5 +53,6 @@ jobs:
       # Deploy
       - name: Deploy
         run: |-
-          helm upgrade --install mongodb-server bitnami/mongodb
+          helm upgrade --install mongodb-server bitnami/mongodb \
+          --set auth.rootPassword=jsT02vFvMB
     
