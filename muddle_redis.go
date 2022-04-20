@@ -87,7 +87,7 @@ func readRedis() {
 func writeRedis() {
 	_, err := redisClient.Set(muddleStrings(), muddleStrings(), 5*time.Hour).Result()
 	if err != nil {
-		logger.Error().BatchErr(err).BatchMsg("[write-redis]")
+		logger.Error().BatchErr(err).BatchMsg("[write-redis]" + err.Error())
 	}
 
 }
@@ -109,7 +109,7 @@ func incRedis(keyne string) {
 	for ; ; i++ {
 		s := redisClient.Set(keyne, i, 0)
 		if s.Err() != nil {
-			logger.Error().Err(s.Err()).BatchMsg("[redis]")
+			logger.Error().Err(s.Err()).BatchMsg("[redis]" + s.Err().Error())
 		}
 		sleepTime, _ := mathfunc.RandInt(int(time.Millisecond), int(time.Second))
 		time.Sleep(time.Duration(sleepTime))
