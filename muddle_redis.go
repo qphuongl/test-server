@@ -96,7 +96,8 @@ func muddleStrings() string {
 	s := ""
 	lenStr, _ := mathfunc.RandInt(1, len(alphabet))
 	for i := 0; i < lenStr; i++ {
-		s += alphabet[i]
+		randID, _ := mathfunc.Random0ToInt(len(alphabet))
+		s += alphabet[randID]
 	}
 	return s
 }
