@@ -50,7 +50,7 @@ func connectRedis() *redis.Client {
 
 func connectMongo() (*mongo.Client, error) {
 	return mongorely.Connect(context.Background(), mongorely.DbConfig{
-		DbName:   "",
+		DbName:   "atest",
 		UserName: "root",
 		Password: config.EnvConfig.MongoPass,
 		Host:     config.EnvConfig.MongoHost,
