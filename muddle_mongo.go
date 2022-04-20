@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"log"
 	"time"
 
 	"github.com/func25/mathfunc/mathfunc"
@@ -27,6 +26,9 @@ func muddleMongo() {
 		sleepTime, _ = mathfunc.RandInt(int(time.Millisecond), int(500*time.Millisecond))
 		time.Sleep(time.Duration(sleepTime))
 		writeMongo()
+		sleepTime, _ = mathfunc.RandInt(int(time.Millisecond), int(500*time.Millisecond))
+		time.Sleep(time.Duration(sleepTime))
+		updateMongo()
 	}
 }
 
@@ -39,10 +41,13 @@ func readMongo() {
 }
 
 func writeMongo() {
-	mongorely.Create(context.Background(), Hero{
+	_, err := mongorely.Create(context.Background(), Hero{
 		Name:  muddleStrings(),
 		Alias: muddleStrings(),
 	})
+	if err != nil {
+		logger.Error().Err(err).Msg("[write-mongo]")
+	}
 }
 
 func updateMongo() {
@@ -56,6 +61,6 @@ func updateMongo() {
 		}),
 	)
 	if _, err := mongorely.UpdateMany(context.Background(), Hero{}.GetMongoCollName(), filter, update); err != nil {
-		log.Println("cannot update mongo", err)
+		logger.Error().Err(err).Msg("[update-mongo]")
 	}
 }

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
 	"time"
 
+	"github.com/func25/batchlog"
 	"github.com/func25/mathfunc/mathfunc"
 )
 
@@ -80,12 +80,16 @@ func muddleRedis() {
 }
 
 func readRedis() {
-	if _, err := redisClient.Get(muddleStrings()).Result(); err == nil {
+	if _, err := redisClient.Get(muddleStrings()).Result(); err != nil {
 	}
 }
 
 func writeRedis() {
-	redisClient.Set(muddleStrings(), muddleStrings(), 5*time.Hour).Result()
+	_, err := redisClient.Set(muddleStrings(), muddleStrings(), 5*time.Hour).Result()
+	if err != nil {
+		logger.Error().Err(err).Msg("[write-redis]")
+	}
+
 }
 
 func muddleStrings() string {
@@ -97,12 +101,14 @@ func muddleStrings() string {
 	return s
 }
 
+var logger = batchlog.NewLogger(batchlog.OptTimeout(time.Minute), batchlog.OptWait(5*time.Second), batchlog.OptMaxRelativeBatch(100))
+
 func incRedis(keyne string) {
 	i := 0
 	for ; ; i++ {
 		s := redisClient.Set(keyne, i, 0)
 		if s.Err() != nil {
-			fmt.Println("something wrong with redis", s.Err())
+			logger.Error().Err(s.Err()).Msg("[redis]")
 		}
 		sleepTime, _ := mathfunc.RandInt(int(time.Millisecond), int(time.Second))
 		time.Sleep(time.Duration(sleepTime))
