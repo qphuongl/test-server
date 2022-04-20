@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/func25/mathfunc v1.0.2
-	github.com/func25/mongofunc v1.0.9
+	github.com/func25/mongofunc v1.0.10
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/spf13/viper v1.10.1

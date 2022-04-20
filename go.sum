@@ -6,8 +6,8 @@ github.com/fsnotify/fsnotify v1.5.1 h1:mZcQUHVQUQWoPXXtuf9yuEXKudkV2sx1E06UadKWp
 github.com/fsnotify/fsnotify v1.5.1/go.mod h1:T3375wBYaZdLLcVNkcVbzGHY7f1l/uK5T5Ai1i3InKU=
 github.com/func25/mathfunc v1.0.2 h1:dakYwYJvoFeh7EcJLtcRvlIm/QguP39329HXKOB1wFc=
 github.com/func25/mathfunc v1.0.2/go.mod h1:2Y0Bz/mVW8UA6pAZc4wMGM2Cp2t6x1b8CBQsd7JwjL0=
-github.com/func25/mongofunc v1.0.9 h1:byYwm8MlT16s9hwWBYSVxVHe2s+E3A9tcnzCTYXj53o=
-github.com/func25/mongofunc v1.0.9/go.mod h1:GxbjVAW8fiqB2ZdkfGY0yr2N4KG39BVO+XPH6sxliA0=
+github.com/func25/mongofunc v1.0.10 h1:vJi5c1jNIsKd5r6TsvkfSaA3LvkvdZtaCO925xSoi1c=
+github.com/func25/mongofunc v1.0.10/go.mod h1:GxbjVAW8fiqB2ZdkfGY0yr2N4KG39BVO+XPH6sxliA0=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=
 github.com/gin-contrib/sse v0.1.0/go.mod h1:RHrZQHXnP2xjPF+u1gW/2HnVO7nvIa9PG3Gm+fLHvGI=
 github.com/gin-gonic/gin v1.7.7 h1:3DoBmSbJbZAWqXJC3SLjAPfutPJJRN1U5pALB7EeTTs=
