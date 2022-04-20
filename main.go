@@ -122,7 +122,7 @@ func startServer() {
 		}
 		c.JSON(http.StatusNotFound, gin.H{"message": "404 not found"})
 	})
-
+	fmt.Println(config.EnvConfig)
 	// if err := r.Run("0.0.0.0:80"); err != nil {
 	if config.EnvConfig.Port == 0 {
 		config.EnvConfig.Port = 80
