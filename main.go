@@ -41,7 +41,7 @@ func main() {
 func connectRedis() *redis.Client {
 	fmt.Println(config.EnvConfig)
 	c := redis.NewClient(&redis.Options{
-		Addr:     fmt.Sprintf("%s:%s", config.EnvConfig.MongoHost, "6379"),
+		Addr:     fmt.Sprintf("%s:%s", config.EnvConfig.RedisHost, "6379"),
 		Password: config.EnvConfig.RedisPass,
 	})
 
