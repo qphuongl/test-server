@@ -46,7 +46,7 @@ func writeMongo() {
 		Alias: muddleStrings(),
 	})
 	if err != nil {
-		logger.Error().Err(err).Msg("[write-mongo]")
+		logger.Error().BatchErr(err).BatchMsg("[write-mongo]")
 	}
 }
 
@@ -61,6 +61,6 @@ func updateMongo() {
 		}),
 	)
 	if _, err := mongorely.UpdateMany(context.Background(), Hero{}.GetMongoCollName(), filter, update); err != nil {
-		logger.Error().Err(err).Msg("[update-mongo]")
+		logger.Error().BatchErr(err).BatchMsg("[update-mongo]")
 	}
 }
