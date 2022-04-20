@@ -32,15 +32,16 @@ func main() {
 		log.Println("cannot connect mongo")
 	}
 
-	muddleRedis()
-	MuddleMongo()
+	go muddleRedis()
+	go muddleMongo()
+
 	startServer()
 }
 
 func connectRedis() *redis.Client {
 	fmt.Println(config.EnvConfig)
 	c := redis.NewClient(&redis.Options{
-		Addr:     "redis-server.default.svc.cluster.local:6379",
+		Addr:     fmt.Sprintf("%s:%s", config.EnvConfig.MongoHost, "6379"),
 		Password: config.EnvConfig.RedisPass,
 	})
 
@@ -52,7 +53,7 @@ func connectMongo() (*mongo.Client, error) {
 		DbName:   "",
 		UserName: "root",
 		Password: config.EnvConfig.MongoPass,
-		Host:     "mongodb-server.default.svc.cluster.local",
+		Host:     config.EnvConfig.MongoHost,
 		Port:     "27017",
 	})
 }
@@ -125,7 +126,6 @@ func startServer() {
 	if config.EnvConfig.Port == 0 {
 		config.EnvConfig.Port = 80
 	}
-	fmt.Println(config.EnvConfig)
 	if err := r.Run(fmt.Sprintf(":%d", config.EnvConfig.Port)); err != nil {
 		log.Fatal("cannot run server", err)
 	}

@@ -19,7 +19,7 @@ func (Hero) GetMongoCollName() string {
 	return "Heroes"
 }
 
-func MuddleMongo() {
+func muddleMongo() {
 	for {
 		sleepTime, _ := mathfunc.RandInt(int(time.Millisecond), int(500*time.Millisecond))
 		time.Sleep(time.Duration(sleepTime))

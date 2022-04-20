@@ -22,6 +22,10 @@ spec:
           resources:
             {{- toYaml .Values.pod.resources | nindent 12 }}
           env:
+            - name: MONGO_HOST
+              value: mongodb-server.default.svc.cluster.local
+            - name: REDIS_HOST
+              value: redis-server.default.svc.cluster.local
             - name: MESSAGE
               valueFrom:
                 configMapKeyRef:
