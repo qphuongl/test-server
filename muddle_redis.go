@@ -81,7 +81,6 @@ func muddleRedis() {
 
 func readRedis() {
 	if _, err := redisClient.Get(muddleStrings()).Result(); err == nil {
-		fmt.Println("read 1")
 	}
 }
 
