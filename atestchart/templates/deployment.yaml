@@ -39,6 +39,12 @@ spec:
                   name: redis-secrets
                   key: REDIS_PASS
                   optional: false
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-server
+                  key: mongodb-root-password
+                  optional: false
           livenessProbe:
             httpGet:
               path: /api/healthy

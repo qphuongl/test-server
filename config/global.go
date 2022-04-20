@@ -13,6 +13,7 @@ type ENVConfig struct {
 	Message        string `mapstructure:"MESSAGE"`
 	PrivateMessage string `mapstructure:"PRIVATE_MESSAGE"`
 	RedisPass      string `mapstructure:"REDIS_PASS"`
+	MongoPass      string `mapstructure:"MONGO_PASS"`
 }
 
 var EnvConfig ENVConfig

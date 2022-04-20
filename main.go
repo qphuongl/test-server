@@ -2,27 +2,38 @@ package main
 
 import (
 	"atest/config"
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 	"strconv"
-	"time"
 
+	"github.com/func25/mongofunc/mongorely"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v7"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 //helm install --dry-run --debug atest ./atestchart --set image.repo=gcr.io --set image.name=atest -f ./atestchart/values-base.yaml -f ./atestchart/values-staging.yaml
+var redisClient *redis.Client
+var mongoClient *mongo.Client
 
 func main() {
+	var err error
 	if err := config.Init(); err != nil {
 		// log.Fatal("cannot init config ", err)
 		log.Println(err)
 	}
 
-	c := connectRedis()
-	defer c.Close()
+	redisClient = connectRedis()
+	defer redisClient.Close()
 
+	if mongoClient, err = connectMongo(); err != nil {
+		log.Println("cannot connect mongo")
+	}
+
+	muddleRedis()
+	MuddleMongo()
 	startServer()
 }
 
@@ -33,19 +44,17 @@ func connectRedis() *redis.Client {
 		Password: config.EnvConfig.RedisPass,
 	})
 
-	go func() {
-		i := 0
-		for {
-			s := c.Set("keyne", i, 0)
-			if s.Err() != nil {
-				fmt.Println("something wrong with redis", s.Err())
-			}
-			time.Sleep(1 * time.Second)
-			i++
-		} //
-	}()
-
 	return c
+}
+
+func connectMongo() (*mongo.Client, error) {
+	return mongorely.Connect(context.Background(), mongorely.DbConfig{
+		DbName:   "",
+		UserName: "root",
+		Password: config.EnvConfig.MongoPass,
+		Host:     "mongodb-server.default.svc.cluster.local",
+		Port:     "27017",
+	})
 }
 
 func startServer() {
