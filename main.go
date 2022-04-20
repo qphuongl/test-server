@@ -36,6 +36,7 @@ func main() {
 	go muddleMongo()
 
 	startServer()
+
 }
 
 func connectRedis() *redis.Client {
