@@ -102,7 +102,7 @@ func muddleStrings() string {
 	return s
 }
 
-var logger = batchlog.NewLogger(batchlog.OptTimeout(time.Minute), batchlog.OptWait(5*time.Second), batchlog.OptMaxRelativeBatch(100))
+var logger = batchlog.NewLogger(batchlog.OptTimeout(5*time.Minute), batchlog.OptWait(10*time.Second), batchlog.OptMaxRelativeBatch(100))
 
 func incRedis(keyne string) {
 	i := 0
