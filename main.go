@@ -11,6 +11,7 @@ import (
 	"github.com/func25/mongofunc/mongorely"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v7"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -50,13 +51,29 @@ func connectRedis() *redis.Client {
 }
 
 func connectMongo() (*mongo.Client, error) {
-	return mongorely.Connect(context.Background(), mongorely.DbConfig{
+	cl, err := mongorely.Connect(context.Background(), mongorely.DbConfig{
 		DbName:   "atest",
 		UserName: "root",
 		Password: config.EnvConfig.MongoPass,
 		Host:     config.EnvConfig.MongoHost,
 		Port:     "27017",
 	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	mod := mongo.IndexModel{
+		Keys: bson.M{
+			"name": 1,
+		}, Options: nil,
+	}
+	_, err = cl.Database("atest").Collection(Hero{}.GetMongoCollName()).Indexes().CreateOne(context.Background(), mod)
+	if err != nil {
+		logger.Error().Err(err).Msg("[mongo][index]: " + err.Error())
+	}
+
+	return cl, nil
 }
 
 func startServer() {
