@@ -53,5 +53,6 @@ jobs:
       # Deploy
       - name: Deploy
         run: |-
-          helm upgrade --install redis-server-test bitnami/redis
+          helm upgrade --install redis-server-test bitnami/redis \
+          -f ./redis2chart/values.yaml
     
